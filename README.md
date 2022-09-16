@@ -21,3 +21,6 @@ React is a free and open-source front-end JavaScript library for building user i
 - Run the application: `npm run dev`
 - Launch Prisma: `npx prisma studio`
 - Have fun!
+
+### How to update the database?
+For any changes in the db schema, update the following file `prisma` > `schema.prisma` and run the migration command on the terminal `prisma migrate dev --name init` where `init` is the name of your migration.

@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Commands
+// Prisma Documentation: https://www.prisma.io/docs/getting-started
+// Install Prisma: npm install prisma --save-dev
+// Initialize Prisma: npx prisma init
+// Push a schema after creating its model: npx prisma db push
+// Launch Prisma Studio: npx prisma studio
+// Connect Prisma to NextJS: npm install @prisma/client
+// Generate an update to your schema whenever you change your schema: npx prisma generate
+// Access Prisma Studio: http://localhost:5555/
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Person {
+  personId         String   @id @default(uuid()) @db.Uuid
+  firstName        String
+  lastName         String
+  email            String
+  isEmailConfirmed Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

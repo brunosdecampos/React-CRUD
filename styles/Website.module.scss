@@ -1,0 +1,17 @@
+//
+// Structure
+//
+
+.topNavBar {
+  @apply fixed top-0 left-0 right-0 flex gap-10 justify-between items-center text-blue-700 text-base p-[30px] md:p-10 bg-white md:bg-transparent;
+}
+
+.signUpForm {
+  @apply pt-14 md:pt-0 md:flex md:flex-col md:justify-center md:items-center md:h-full;
+}
+
+// Equivalent to tailwind md: class
+@media (min-width: 768px) {}
+
+// Equivalent to tailwind lg: class
+@media (min-width: 1024px) {}

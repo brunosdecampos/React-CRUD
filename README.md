@@ -11,3 +11,13 @@ React is a free and open-source front-end JavaScript library for building user i
 - `Prisma`: An ORM (Object-relational mapping) that helps app developers build faster and make fewer errors.
 - `Tailwind CSS`: An open source CSS framework. The main feature of this library is that, unlike other CSS frameworks like Bootstrap, it does not provide a series of predefined classes for elements such as buttons or tables.
 - `Sass`: A preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets.
+
+## How to install the application?
+- Clone this repository
+- Open the project with you choice of IDE or code editor
+- Open terminal and cd into its project folder
+- Install all project dependencies with the following command: `npm i`
+- Start Postgres database
+- Run the application: `npm run dev`
+- Launch Prisma: `npx prisma studio`
+- Have fun!

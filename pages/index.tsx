@@ -28,7 +28,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
 
         {/* Mobile */}
         <div className='w-full md:hidden'>
-          <div className='bg-slate-100 p-5 font-montserrat-600 text-sm text-slate-500'>Name</div>
+          <div className='bg-slate-100 border-b-[1px] border-slate-200 p-5 font-montserrat-600 text-sm text-slate-500'>Name</div>
           {data.map((user: User) => (
             <div className='border-b-[1px] border-slate-200 space-y-1 p-5'>
               <div className='font-montserrat-600 text-sm text-slate-800 w-full truncate'>{user.firstName} {user.lastName}</div>
@@ -44,7 +44,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
         {/* Desktop */}
         <table className="table-auto w-full hidden md:table" cellPadding={20}>
           <thead>
-            <tr className='bg-slate-100'>
+            <tr className='bg-slate-100 border-b-[1px] border-slate-200'>
               <th className='font-montserrat-600 text-sm text-slate-500' align='left'>Name</th>
               <th className='font-montserrat-600 text-sm text-slate-500' align='left'>Email</th>
               <th className='font-montserrat-600 text-sm text-slate-500'>Edit</th>
@@ -68,7 +68,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/list/users')
+  const res = await fetch('http://localhost:3000/api/users')
   const data = await res.json()
   return { props: { data } }
 }

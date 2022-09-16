@@ -3,7 +3,7 @@
 //
 
 .topNavBar {
-  @apply fixed top-0 left-0 right-0 flex gap-10 justify-between items-center text-blue-700 text-base p-[30px] md:p-10 bg-white md:bg-transparent;
+  @apply fixed top-0 left-0 right-0 flex gap-10 justify-between items-center text-blue-700 text-sm p-[30px] md:p-10 bg-white md:bg-transparent;
 }
 
 .listView {

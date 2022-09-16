@@ -39,74 +39,61 @@ const SignUpForm: NextPage = () => {
   const [error, setError] = useState(false);
 
   const fetchUser = async (email: string) => {
-    const req = await fetch(`http://localhost:3000/api/user/${email}`);
+    const res = await fetch(`http://localhost:3000/api/user/${email}`)
+    const data = await res.json()
+    console.log(data)
+
+    console.log('FIELD EMAIL = ' + email)
+    console.log('DATA EMAIL = ' + data.email)
+
+    if (data.email === email)
+      console.log('DUPLICATE')
+    else
+      console.log('YOU ARE GOOD')
+
+    // const req = await fetch(`http://localhost:3000/api/user/${email}`);
     // const req = await fetch('https://randomuser.me/api/?gender=male&results=100');
-    const data = await req.json();
-    let results = data.length;
+    // const data = await req.json();
+    // let results = data.length;
 
     // User is already registered
-    if (results > 0) {
-      setError(true);
-    } else {
-      // Continue
-      setError(false);
-    }
-    // console.log(email);
-    // console.log(data);
-    // return setData(newData.results);
+    // if (results > 0) {
+    //   setError(true);
+    // } else {
+    // Continue
+    //   setError(false);
+    // }
   };
 
-  // async function getUser(data: FormData) {
-  //   try {
-  //     fetch(`http://localhost:3000/api/user/${data.email}`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       method: 'GET'
-  //     }).then(() => {
-  // console.log(data.email);
-  // alert(data.personId);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   async function signUp(data: FormData, resetForm: (nextState?: Partial<FormikState<FormData>> | undefined) => void) {
+    fetchUser(data.email)
+
     // try {
-    //   // getUser(data);
-    //   fetchUser(data.email);
+    //   fetch('http://localhost:3000/api/create/user', {
+    //     body: JSON.stringify(data),
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     method: 'POST'
+    //   }).then(() => {
+    //     fetchUser(data.email);
+
+    // if (data.personId) {
+    //   alert('duplicate');
+    // } else {
+    //   setError(false);
+    //   resetForm({
+    //     values: initialValues
+    //   })
+    //   setSubmitting(false);
+    //   router.push({ pathname: "/" });
+    // }
+    //   })
     // } catch (error) {
     //   console.log(error);
+    //   setError(true);
+    //   setSubmitting(false);
     // }
-
-
-    try {
-      fetch('http://localhost:3000/api/sign-up', {
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST'
-      }).then(() => {
-        // fetchUser();
-
-        if (data.personId) {
-          alert('duplicate');
-        } else {
-          setError(false);
-          resetForm({
-            values: initialValues
-          })
-          setSubmitting(false);
-          router.push({ pathname: "/" });
-        }
-      })
-    } catch (error) {
-      console.log(error);
-      setError(true);
-      setSubmitting(false);
-    }
   }
 
   const handleSubmit = async (data: FormData, resetForm: (nextState?: Partial<FormikState<FormData>> | undefined) => void) => {

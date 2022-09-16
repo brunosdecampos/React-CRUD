@@ -1,5 +1,5 @@
 // React and Next
-import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 import { useState } from 'react';
 import { useRouter } from "next/router";
 
@@ -73,40 +73,40 @@ const SignUpForm: NextPage = () => {
   // }
 
   async function signUp(data: FormData, resetForm: (nextState?: Partial<FormikState<FormData>> | undefined) => void) {
-    try {
-      // getUser(data);
-      fetchUser(data.email);
-    } catch (error) {
-      console.log(error);
-    }
-
-
     // try {
-    //   fetch('http://localhost:3000/api/sign-up', {
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     method: 'POST'
-    //   }).then(() => {
-    //     fetchUser();
-
-    // if (data.personId) {
-    //   alert('duplicate');
-    // } else {
-    //   setError(false);
-    //   resetForm({
-    //     values: initialValues
-    //   })
-    //   setSubmitting(false);
-    //   router.push({ pathname: "/verify", query: { email: data.email } }, "verify");
-    // }
-    //   })
+    //   // getUser(data);
+    //   fetchUser(data.email);
     // } catch (error) {
     //   console.log(error);
-    //   setError(true);
-    //   setSubmitting(false);
     // }
+
+
+    try {
+      fetch('http://localhost:3000/api/sign-up', {
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      }).then(() => {
+        // fetchUser();
+
+        if (data.personId) {
+          alert('duplicate');
+        } else {
+          setError(false);
+          resetForm({
+            values: initialValues
+          })
+          setSubmitting(false);
+          router.push({ pathname: "/" });
+        }
+      })
+    } catch (error) {
+      console.log(error);
+      setError(true);
+      setSubmitting(false);
+    }
   }
 
   const handleSubmit = async (data: FormData, resetForm: (nextState?: Partial<FormikState<FormData>> | undefined) => void) => {

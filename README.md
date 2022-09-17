@@ -1,6 +1,8 @@
 # React CRUD
 React JS web application that handles CRUD operations (Create, Read, Update, Delete).
 
+![Image](https://raw.githubusercontent.com/brunosdecampos/React-CRUD/main/public/images/project-preview.png)
+
 ## What is React JS?
 React is a free and open-source front-end JavaScript library for building user interfaces based on UI components. It is maintained by Meta and a community of individual developers and companies.
 

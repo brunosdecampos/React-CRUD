@@ -7,11 +7,11 @@
 }
 
 .listView {
-  @apply mx-auto px-[30px] py-[30px] md:w-[700px] mt-12 md:pt-0;
+  @apply mx-auto px-[30px] py-[30px] md:w-[750px] md:pt-0;
 }
 
 .userForm {
-  @apply pt-14 md:pt-0 md:flex md:flex-col md:justify-center md:items-center md:h-full;
+  @apply flex flex-col justify-center items-center h-full;
 }
 
 // Equivalent to tailwind md: class

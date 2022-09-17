@@ -1,13 +1,13 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import type { NextPage } from 'next'
+import Head from 'next/head'
 
 type MetaProps = {
-  title?: string;
-  description?: string;
-};
+  title?: string
+  description?: string
+}
 
 const Meta: NextPage<MetaProps> = ({ title, description }) => {
-  const titleName = `React CRUD ${!title?.length ? '' : ' | ' + title}`;
+  const titleName = `React CRUD ${!title?.length ? '' : ' | ' + title}`
 
   return <>
     <Head>
@@ -22,11 +22,11 @@ const Meta: NextPage<MetaProps> = ({ title, description }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
   </>
-};
+}
 
 Meta.defaultProps = {
   title: '',
   description: 'Cash buyer listing sign up app'
-};
+}
 
-export { Meta };
+export { Meta }

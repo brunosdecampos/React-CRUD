@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from '@lib/prisma';
+import { NextApiRequest, NextApiResponse } from "next"
+import { prisma } from '@lib/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const user = await prisma.person.findMany({
@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       lastName: true,
       email: true
     }
-  });
+  })
 
-  res.status(200).json(user);
+  res.status(200).json(user)
 }

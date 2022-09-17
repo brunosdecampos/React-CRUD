@@ -1,9 +1,17 @@
-import React from 'react';
-import { NextPage } from 'next';
-import { ErrorMessage, Field, useField } from 'formik';
+import React from 'react'
+import { NextPage } from 'next'
+import { ErrorMessage, Field, useField } from 'formik'
 
-export const TextField: NextPage<{ label: string, name: string, type: string, maxLength?: number, placeholder?: string }> = ({ label, ...props }) => {
-  const [input, meta] = useField(props);
+interface TextFieldForm {
+  label: string,
+  name: string,
+  type: string,
+  maxLength?: number,
+  placeholder?: string
+}
+
+export const TextField: NextPage<TextFieldForm> = ({ label, ...props }) => {
+  const [input, meta] = useField(props)
 
   return (
     <div className='w-full'>

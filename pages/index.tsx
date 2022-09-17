@@ -2,7 +2,7 @@
 import type { NextPage } from 'next'
 
 // External Libraries
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 // Local Components
 import { Meta } from '@modules/general'
@@ -30,7 +30,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
         <div className='w-full md:hidden'>
           <div className='bg-slate-100 border-b-[1px] border-slate-200 p-5 font-montserrat-600 text-sm text-slate-500'>Name</div>
           {data.map((user: User) => (
-            <div className='border-b-[1px] border-slate-200 space-y-1 p-5'>
+            <div key={user.personId} className='border-b-[1px] border-slate-200 space-y-1 p-5'>
               <div className='font-montserrat-600 text-sm text-slate-800 w-full truncate'>{user.firstName} {user.lastName}</div>
               <div className='font-montserrat-500 text-sm text-slate-600 w-full truncate'>{user.email}</div>
               <div className='flex gap-4 pt-3'>
@@ -52,6 +52,11 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
             </tr>
           </thead>
           <tbody>
+            {data.length < 1 && <>
+              <tr className='border-b-[1px] border-slate-200'>
+                <td align='center' colSpan={4}><div className='font-montserrat-500 text-sm text-slate-600'>No user created yet</div></td>
+              </tr>
+            </>}
             {data.map((user: User) => (
               <tr key={user.personId} className='border-b-[1px] border-slate-200'>
                 <td align='left'><div className='font-montserrat-600 text-sm text-slate-800'>{user.firstName} {user.lastName}</div></td>

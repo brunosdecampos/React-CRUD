@@ -1,12 +1,12 @@
 // React and Next
-import { NextPage } from "next";
-import Link from "next/link";
+import { NextPage } from "next"
+import Link from "next/link"
 
 // External Libraries
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 
 // Local Components
-import stylesWebsite from '@styles/Website.module.scss';
+import stylesWebsite from '@styles/Website.module.scss'
 
 interface Link {
   leftLinkName?: string,
@@ -16,10 +16,9 @@ interface Link {
 }
 
 const TopNavBar: NextPage<Link> = ({ leftLinkName, leftLinkPath, rightLinkName, rightLinkPath }) => {
-  let hostUrl = 'http://localhost:3000';
-  let leftLinkUrl = leftLinkPath ? new URL(hostUrl + leftLinkPath) : '';
-  let rightLinkUrl = rightLinkPath ? new URL(hostUrl + rightLinkPath) : '';
-  console.log(hostUrl + leftLinkPath);
+  let hostUrl = 'http://localhost:3000'
+  let leftLinkUrl = leftLinkPath ? new URL(hostUrl + leftLinkPath) : ''
+  let rightLinkUrl = rightLinkPath ? new URL(hostUrl + rightLinkPath) : ''
 
   return <>
     {(leftLinkPath || rightLinkPath) && <>
@@ -46,4 +45,4 @@ const TopNavBar: NextPage<Link> = ({ leftLinkName, leftLinkPath, rightLinkName, 
   </>
 }
 
-export { TopNavBar };
+export { TopNavBar }

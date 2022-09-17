@@ -1,4 +1,4 @@
-# React CRUD
+# React with Next.js CRUD
 React JS web application that handles CRUD operations (Create, Read, Update, Delete).
 
 ![Image](https://raw.githubusercontent.com/brunosdecampos/React-CRUD/main/public/images/project-preview.png)

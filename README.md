@@ -1,5 +1,5 @@
 # React with Next.js CRUD
-React JS web application that handles CRUD operations (Create, Read, Update, Delete).
+React JS web application that handles CRUD operations (Create, Read, Update, Delete) with Next.js framework.
 
 ![Image](https://raw.githubusercontent.com/brunosdecampos/React-CRUD/main/public/images/project-preview.png)
 

@@ -1,5 +1,6 @@
 // React and Next
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 // External Libraries
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
@@ -17,8 +18,30 @@ interface User {
 }
 
 const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
-  const handleUpdate = () => { }
-  const handleDelete = () => { }
+  const router = useRouter()
+
+  const reloadPage = () => {
+    router.replace(router.asPath)
+  }
+
+  const handleUpdate = async (userId: string) => {
+    alert('Update user id: ' + userId)
+  }
+
+  const handleDelete = async (userId: string) => {
+    try {
+      fetch(`http://localhost:3000/api/delete/user/${userId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: 'DELETE'
+      }).then(() => {
+        reloadPage()
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return <>
     <Meta title='Sign up' description='User registration form' />
@@ -42,8 +65,8 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
               <div className='font-montserrat-600 text-sm text-slate-800 w-full truncate'>{user.firstName} {user.lastName}</div>
               <div className='font-montserrat-500 text-sm text-slate-600 w-full truncate'>{user.email}</div>
               <div className='flex gap-4 pt-3'>
-                <PencilSquareIcon className="h-5 w-5 text-blue-700" />
-                <TrashIcon className="h-5 w-5 text-blue-700" />
+                <PencilSquareIcon className="h-5 w-5 text-blue-700 cursor-pointer" onClick={() => handleUpdate(user.userId)} />
+                <TrashIcon className="h-5 w-5 text-blue-700 cursor-pointer" onClick={() => handleDelete(user.userId)} />
               </div>
             </div>
           ))}
@@ -69,8 +92,8 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
               <tr key={user.userId} className='border-b-[1px] border-slate-200'>
                 <td align='left'><div className='font-montserrat-600 text-sm text-slate-800'>{user.firstName} {user.lastName}</div></td>
                 <td align='left'><div className='font-montserrat-500 text-sm text-slate-600'>{user.email}</div></td>
-                <td align='center'><PencilSquareIcon className="h-5 w-5 text-blue-700" /></td>
-                <td align='center'><TrashIcon className="h-5 w-5 text-blue-700" /></td>
+                <td align='center'><PencilSquareIcon className="h-5 w-5 text-blue-700 cursor-pointer" onClick={() => handleUpdate(user.userId)} /></td>
+                <td align='center'><TrashIcon className="h-5 w-5 text-blue-700 cursor-pointer" onClick={() => handleDelete(user.userId)} /></td>
               </tr>
             ))}
           </tbody>

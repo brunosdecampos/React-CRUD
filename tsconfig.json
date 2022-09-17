@@ -35,6 +35,10 @@
         "src/modules/*",
         "src/modules/index.ts",
       ],
+      "@models/*": [
+        "src/models/*",
+        "src/models/index.ts",
+      ],
       "@styles/*": [
         "styles/*"
       ]

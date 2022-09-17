@@ -11,24 +11,24 @@ import * as yup from 'yup'
 import { TextField } from '@components/forms'
 import { LoadingSpinnerPortal } from '@modules/general/loading'
 import { Banner, generalBanner, MessageType } from "@components/Banner"
+import { User } from "@models/user.model"
 
-interface FormData {
-  userId: string,
-  firstName: string,
-  lastName: string,
-  email: string
-}
+type ResetForm = (nextState?: Partial<FormikState<User>> | undefined) => void
 
-type ResetForm = (nextState?: Partial<FormikState<FormData>> | undefined) => void
-
-const SignUpForm: NextPage = () => {
+const UserForm: NextPage<{ title: string, data?: User, isEditting?: boolean }> = ({ title, data, isEditting = false }) => {
   const router = useRouter()
+  const [banner, setBanner] = useState(generalBanner)
+  const [submitting, setSubmitting] = useState(false)
 
-  const initialValues: FormData = {
-    userId: '',
-    firstName: '',
-    lastName: '',
-    email: ''
+  //
+  // Form
+  //
+
+  const initialValues: User = {
+    userId: data?.userId || '',
+    firstName: data?.firstName || '',
+    lastName: data?.lastName || '',
+    email: data?.email || ''
   }
 
   const validate = yup.object({
@@ -37,15 +37,15 @@ const SignUpForm: NextPage = () => {
     email: yup.string().required('Email is required').email('Email is invalid'),
   })
 
-  const [banner, setBanner] = useState(generalBanner)
-  const [submitting, setSubmitting] = useState(false)
-
-  const handleSubmit = async (data: FormData, resetForm: ResetForm) => {
+  const handleSubmit = async (data: User, isEditting: boolean, resetForm: ResetForm) => {
     setSubmitting(true)
     setBanner(generalBanner)
 
     try {
-      fetchUser(data, resetForm)
+      if (isEditting)
+        getUserByEmailExceptCurrent(data, resetForm)
+      else
+        getUserByEmail(data, resetForm)
     }
     catch (error) {
       setBanner({ ...banner, visible: true })
@@ -53,8 +53,27 @@ const SignUpForm: NextPage = () => {
     }
   }
 
-  const fetchUser = async (data: FormData, resetForm: ResetForm) => {
-    const res = await fetch(`http://localhost:3000/api/user/${data.email}`)
+  //
+  // Service API
+  //
+
+  // Get the user's id by searching for all user's emails but the currenct user
+  const getUserByEmailExceptCurrent = async (data: User, resetForm: ResetForm) => {
+    const res = await fetch(`http://localhost:3000/api/search/user?email=${data.email}&uid=${data.userId}`)
+    const isUserRegistered = await res.json()
+
+    if (isUserRegistered) {
+      setBanner({ ...banner, visible: true, message: 'This email already exists.' })
+      setSubmitting(false)
+    }
+    else {
+      updateUser(data, resetForm)
+    }
+  }
+
+  // Get the user's id by search for their email
+  const getUserByEmail = async (data: User, resetForm: ResetForm) => {
+    const res = await fetch(`http://localhost:3000/api/search/user?email=${data.email}`)
     const isUserRegistered = await res.json()
 
     if (isUserRegistered) {
@@ -66,7 +85,7 @@ const SignUpForm: NextPage = () => {
     }
   }
 
-  const createUser = async (data: FormData, resetForm: ResetForm) => {
+  const createUser = async (data: User, resetForm: ResetForm) => {
     try {
       fetch('http://localhost:3000/api/create/user', {
         body: JSON.stringify(data),
@@ -86,12 +105,32 @@ const SignUpForm: NextPage = () => {
     }
   }
 
+  const updateUser = async (data: User, resetForm: ResetForm) => {
+    try {
+      fetch(`http://localhost:3000/api/update/user/${data.userId}`, {
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT'
+      }).then(() => {
+        setBanner(generalBanner)
+        router.push({ pathname: "/" })
+        resetForm({ values: initialValues })
+        setSubmitting(false)
+      })
+    } catch (error) {
+      setBanner({ ...banner, visible: true })
+      setSubmitting(false)
+    }
+  }
+
   return <>
     <div className="overflow-y-auto w-full">
-      <Formik initialValues={initialValues} validationSchema={validate} onSubmit={(data, { resetForm }) => handleSubmit(data, resetForm)}>
+      <Formik initialValues={initialValues} validationSchema={validate} onSubmit={(data, { resetForm }) => handleSubmit(data, isEditting, resetForm)}>
         <Form>
           <div className='space-y-6 text-slate-800 px-[30px] py-[50px] mx-auto lg:w-[500px]'>
-            <div className='font-montserrat-800 text-4xl pb-2'>Create user</div>
+            <div className='font-montserrat-800 text-4xl pb-2'>{title}</div>
 
             <Banner visible={banner.visible} type={banner.type} title={banner.title} message={banner.message} />
 
@@ -105,7 +144,7 @@ const SignUpForm: NextPage = () => {
             <div className='flex gap-4 items-center justify-between pt-3'>
               <button className="button primary taller flex gap-3 items-center" type="submit" disabled={submitting}>
                 <LoadingSpinnerPortal visible={submitting} />
-                Create
+                {isEditting ? 'Update' : 'Create'}
               </button>
             </div>
           </div>
@@ -115,4 +154,4 @@ const SignUpForm: NextPage = () => {
   </>
 }
 
-export { SignUpForm }
+export { UserForm }

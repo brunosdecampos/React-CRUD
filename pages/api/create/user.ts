@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '@lib/prisma'
 
+// POST /api/create/user
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { firstName, lastName, email } = req.body
 

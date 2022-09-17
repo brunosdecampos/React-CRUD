@@ -1,2 +1,2 @@
 
-export * from './SignUp.form'
+export * from './User.form'

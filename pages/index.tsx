@@ -1,6 +1,7 @@
 // React and Next
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 // External Libraries
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
@@ -9,13 +10,8 @@ import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { Meta } from '@modules/general'
 import stylesWebsite from '@styles/Website.module.scss'
 import { TopNavBar } from '@modules/website/TopNavBar.layout'
-
-interface User {
-  userId: string,
-  firstName: string,
-  lastName: string,
-  email: string
-}
+import { generalBanner } from '@components/Banner'
+import { User } from '@models/user.model'
 
 const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
   const router = useRouter()
@@ -24,8 +20,10 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
     router.replace(router.asPath)
   }
 
+  const [banner, setBanner] = useState(generalBanner)
+
   const handleUpdate = async (userId: string) => {
-    alert('Update user id: ' + userId)
+    router.push(`/edit/user/${userId}`)
   }
 
   const handleDelete = async (userId: string) => {
@@ -44,9 +42,9 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
   }
 
   return <>
-    <Meta title='Sign up' description='User registration form' />
+    <Meta description='List of all users' />
 
-    <TopNavBar rightLinkName='Create user' rightLinkPath='/create' />
+    <TopNavBar rightLinkName='Create user' rightLinkPath='/create/user' />
 
     <div className={stylesWebsite.listView}>
       <div className="overflow-y-auto w-full">
@@ -54,7 +52,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
 
         {/* Mobile */}
         <div className='w-full md:hidden'>
-          <div className='bg-slate-100 border-b-[1px] border-slate-200 p-5 font-montserrat-600 text-sm text-slate-500'>Name</div>
+          <div className='bg-slate-100 border-y-[1px] border-slate-200 p-5 font-montserrat-600 text-sm text-slate-500'>Name</div>
           {data.length < 1 && <>
             <div className='border-b-[1px] border-slate-200 space-y-1 p-5'>
               <div className='font-montserrat-500 text-sm text-slate-600 w-full truncate text-center'>No user created yet</div>
@@ -75,7 +73,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
         {/* Desktop */}
         <table className="table-auto w-full hidden md:table" cellPadding={20}>
           <thead>
-            <tr className='bg-slate-100 border-b-[1px] border-slate-200'>
+            <tr className='bg-slate-100 border-y-[1px] border-slate-200'>
               <th className='font-montserrat-600 text-sm text-slate-500' align='left'>Name</th>
               <th className='font-montserrat-600 text-sm text-slate-500' align='left'>Email</th>
               <th className='font-montserrat-600 text-sm text-slate-500'>Edit</th>

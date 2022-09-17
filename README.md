@@ -23,4 +23,8 @@ React is a free and open-source front-end JavaScript library for building user i
 - Have fun!
 
 ## How to update the database?
-For any changes in the database structure, please update the following file `prisma` > `schema.prisma`. Then run the migration command on the terminal `npx prisma migrate dev --name init` where `init` is the name of your migration (for instance: `added_phone_number`).
+For any changes in the database structure, please update the following file `prisma` > `schema.prisma`. Then run the migration command on the terminal `npx prisma migrate dev --name init` where `init` is the name of your migration (for instance: `added_phone_number`). You may need to restart the server after the migration.
+
+### How to merge migrations?
+In case you have more than one migration in the same Pull Request, it is considered a good practice to squash them into one, this way you'll have one migration per PR. To achieve that, delete the contents of prisma/migration then run the following command:
+`npx prisma migrate dev --name squashed_migrations`

@@ -10,13 +10,16 @@ import stylesWebsite from '@styles/Website.module.scss'
 import { TopNavBar } from '@modules/website/TopNavBar.layout'
 
 interface User {
-  personId: string,
+  userId: string,
   firstName: string,
   lastName: string,
   email: string
 }
 
 const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
+  const handleUpdate = () => { }
+  const handleDelete = () => { }
+
   return <>
     <Meta title='Sign up' description='User registration form' />
 
@@ -35,7 +38,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
             </div>
           </>}
           {data.map((user: User) => (
-            <div key={user.personId} className='border-b-[1px] border-slate-200 space-y-1 p-5'>
+            <div key={user.userId} className='border-b-[1px] border-slate-200 space-y-1 p-5'>
               <div className='font-montserrat-600 text-sm text-slate-800 w-full truncate'>{user.firstName} {user.lastName}</div>
               <div className='font-montserrat-500 text-sm text-slate-600 w-full truncate'>{user.email}</div>
               <div className='flex gap-4 pt-3'>
@@ -63,7 +66,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
               </tr>
             </>}
             {data.map((user: User) => (
-              <tr key={user.personId} className='border-b-[1px] border-slate-200'>
+              <tr key={user.userId} className='border-b-[1px] border-slate-200'>
                 <td align='left'><div className='font-montserrat-600 text-sm text-slate-800'>{user.firstName} {user.lastName}</div></td>
                 <td align='left'><div className='font-montserrat-500 text-sm text-slate-600'>{user.email}</div></td>
                 <td align='center'><PencilSquareIcon className="h-5 w-5 text-blue-700" /></td>

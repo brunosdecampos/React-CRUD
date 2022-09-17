@@ -13,7 +13,7 @@ import { LoadingSpinnerPortal } from '@modules/general/loading'
 import { Banner, generalBanner, MessageType } from "@components/Banner"
 
 interface FormData {
-  personId: string,
+  userId: string,
   firstName: string,
   lastName: string,
   email: string
@@ -25,7 +25,7 @@ const SignUpForm: NextPage = () => {
   const router = useRouter()
 
   const initialValues: FormData = {
-    personId: '',
+    userId: '',
     firstName: '',
     lastName: '',
     email: ''

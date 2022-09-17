@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "personId" UUID NOT NULL,
+    "userId" UUID NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -8,5 +8,5 @@ CREATE TABLE "User" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("personId")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
 );

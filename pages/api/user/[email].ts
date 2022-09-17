@@ -4,7 +4,7 @@ import { prisma } from '@lib/prisma'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const email = String(req.query.email)
 
-  const person = await prisma.person.findFirst({
+  const person = await prisma.user.findFirst({
     select: {
       email: true
     },

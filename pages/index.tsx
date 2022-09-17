@@ -29,6 +29,11 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
         {/* Mobile */}
         <div className='w-full md:hidden'>
           <div className='bg-slate-100 border-b-[1px] border-slate-200 p-5 font-montserrat-600 text-sm text-slate-500'>Name</div>
+          {data.length < 1 && <>
+            <div className='border-b-[1px] border-slate-200 space-y-1 p-5'>
+              <div className='font-montserrat-500 text-sm text-slate-600 w-full truncate text-center'>No user created yet</div>
+            </div>
+          </>}
           {data.map((user: User) => (
             <div key={user.personId} className='border-b-[1px] border-slate-200 space-y-1 p-5'>
               <div className='font-montserrat-600 text-sm text-slate-800 w-full truncate'>{user.firstName} {user.lastName}</div>

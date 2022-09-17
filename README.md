@@ -23,4 +23,4 @@ React is a free and open-source front-end JavaScript library for building user i
 - Have fun!
 
 ## How to update the database?
-For any changes in the database structure, please update the following file `prisma` > `schema.prisma`. Then run the migration command on the terminal `prisma migrate dev --name init` where `init` is the name of your migration (for instance: `added_phone_number`).
+For any changes in the database structure, please update the following file `prisma` > `schema.prisma`. Then run the migration command on the terminal `npx prisma migrate dev --name init` where `init` is the name of your migration (for instance: `added_phone_number`).

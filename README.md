@@ -21,6 +21,7 @@ React is a free and open-source front-end JavaScript library for building user i
 - Install all project dependencies with the following command: `npm i`
 - Set up Postgres database: https://www.youtube.com/watch?v=wTqosS71Dc4
 - Start Postgres database
+- Create a table in your database called mydb
 - Run the application: `npm run dev`
 - Launch Prisma: `npx prisma studio`
 - Have fun!

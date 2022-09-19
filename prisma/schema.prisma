@@ -9,7 +9,8 @@
 // Launch Prisma Studio: npx prisma studio
 // Connect Prisma to NextJS: npm install @prisma/client
 // Generate an update to your schema whenever you change your schema: npx prisma generate
-// For major changes in the database, try migrating it (where init is the name of the migration): prisma migrate dev --name init
+// For major changes in the database, try migrating it (where init is the name of the migration): npx prisma migrate dev --name init
+// For migration merges, try deleting the contents of prisma/migrations then run: npx prisma migrate dev --name squashed_migrations
 // Access Prisma Studio: http://localhost:5555/
 
 generator client {

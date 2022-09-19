@@ -31,3 +31,8 @@ For any changes in the database structure, please update the following file `pri
 ### How to merge migrations?
 In case you have more than one migration in the same Pull Request, it is considered a good practice to squash them into one, this way you'll have one migration per PR. To achieve that, delete the contents of prisma/migrations then run the following command:
 `npx prisma migrate dev --name squashed_migrations`
+
+### How to manage my postgres database?
+You can manage your db via CLI (Command-Line Interface) or use a visual data tool to help you have a better overview of everything that is going on with your db. Azure Data Studio is a simple and straightforward tool for anyone to get started:
+
+https://azure.microsoft.com/en-us/products/data-studio/

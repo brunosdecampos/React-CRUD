@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { prisma } from '@lib/prisma'
 
+// GET /api/search/user
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const email = String(req.query.email)
   const userId = String(req.query.uid)

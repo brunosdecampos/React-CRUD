@@ -12,6 +12,7 @@ import { TextField } from '@components/forms'
 import { LoadingSpinnerPortal } from '@modules/general/loading'
 import { Banner, generalBanner, MessageType } from "@components/Banner"
 import { User } from "@models/user.model"
+import { BASE_URL } from "@constants/index"
 
 type ResetForm = (nextState?: Partial<FormikState<User>> | undefined) => void
 
@@ -59,7 +60,7 @@ const UserForm: NextPage<{ title: string, data?: User, isEditting?: boolean }> =
 
   // Get the user's id by searching for all user's emails but the currenct user
   const getUserByEmailExceptCurrent = async (data: User, resetForm: ResetForm) => {
-    const res = await fetch(`http://localhost:3000/api/search/user?email=${data.email}&uid=${data.userId}`)
+    const res = await fetch(`${BASE_URL}/api/search/user?email=${data.email}&uid=${data.userId}`)
     const isUserRegistered = await res.json()
 
     if (isUserRegistered) {
@@ -73,7 +74,7 @@ const UserForm: NextPage<{ title: string, data?: User, isEditting?: boolean }> =
 
   // Get the user's id by search for their email
   const getUserByEmail = async (data: User, resetForm: ResetForm) => {
-    const res = await fetch(`http://localhost:3000/api/search/user?email=${data.email}`)
+    const res = await fetch(`${BASE_URL}/api/search/user?email=${data.email}`)
     const isUserRegistered = await res.json()
 
     if (isUserRegistered) {
@@ -87,7 +88,7 @@ const UserForm: NextPage<{ title: string, data?: User, isEditting?: boolean }> =
 
   const createUser = async (data: User, resetForm: ResetForm) => {
     try {
-      fetch('http://localhost:3000/api/create/user', {
+      fetch(`${BASE_URL}/api/create/user`, {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'
@@ -107,7 +108,7 @@ const UserForm: NextPage<{ title: string, data?: User, isEditting?: boolean }> =
 
   const updateUser = async (data: User, resetForm: ResetForm) => {
     try {
-      fetch(`http://localhost:3000/api/update/user/${data.userId}`, {
+      fetch(`${BASE_URL}/api/update/user/${data.userId}`, {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'

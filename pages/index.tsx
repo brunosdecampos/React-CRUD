@@ -12,6 +12,7 @@ import stylesWebsite from '@styles/Website.module.scss'
 import { TopNavBar } from '@modules/website/TopNavBar.layout'
 import { generalBanner } from '@components/Banner'
 import { User } from '@models/user.model'
+import { BASE_URL } from '@constants/index'
 
 const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
   const router = useRouter()
@@ -27,7 +28,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
 
   const handleDelete = async (userId: string) => {
     try {
-      fetch(`http://localhost:3000/api/delete/user/${userId}`, {
+      fetch(`${BASE_URL}/api/delete/user/${userId}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -102,7 +103,7 @@ const UsersList: NextPage<{ data: [User] }> = ({ data }) => {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/users')
+  const res = await fetch(`${BASE_URL}/api/users`)
   const data = await res.json()
   return { props: { data } }
 }

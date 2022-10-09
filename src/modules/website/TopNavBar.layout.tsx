@@ -7,6 +7,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 
 // Local Components
 import stylesWebsite from '@styles/Website.module.scss'
+import { BASE_URL } from "@constants/index"
 
 interface Link {
   leftLinkName?: string,
@@ -16,9 +17,8 @@ interface Link {
 }
 
 const TopNavBar: NextPage<Link> = ({ leftLinkName, leftLinkPath, rightLinkName, rightLinkPath }) => {
-  let hostUrl = 'http://localhost:3000'
-  let leftLinkUrl = leftLinkPath ? new URL(hostUrl + leftLinkPath) : ''
-  let rightLinkUrl = rightLinkPath ? new URL(hostUrl + rightLinkPath) : ''
+  let leftLinkUrl = leftLinkPath ? new URL(BASE_URL + leftLinkPath) : ''
+  let rightLinkUrl = rightLinkPath ? new URL(BASE_URL + rightLinkPath) : ''
 
   return <>
     {(leftLinkPath || rightLinkPath) && <>

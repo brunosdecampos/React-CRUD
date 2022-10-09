@@ -7,6 +7,7 @@ import { UserForm } from '@modules/website'
 import stylesWebsite from '@styles/Website.module.scss'
 import { TopNavBar } from '@modules/website/TopNavBar.layout'
 import { User } from '@models/user.model'
+import { BASE_URL } from '@constants/index'
 
 const EditUser: NextPage<{ data: User }> = ({ data }) => {
   return <>
@@ -21,7 +22,7 @@ const EditUser: NextPage<{ data: User }> = ({ data }) => {
 
 export async function getServerSideProps(context: any) {
   const id = context.params.id
-  const res = await fetch(`http://localhost:3000/api/user/${id}`)
+  const res = await fetch(`${BASE_URL}/api/user/${id}`)
   const data = await res.json()
   return { props: { data, userId: id } }
 }

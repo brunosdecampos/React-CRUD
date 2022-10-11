@@ -52,7 +52,9 @@ function UsersTable() {
     return data
   }
 
-  const { data, error } = useSWR('/api/users', fetcher)
+  const { data, error } = useSWR('/api/users', fetcher, {
+    revalidateOnFocus: false
+  })
 
   if (error) return <Banner visible={true} type={MessageType.Error} title={'Oops!'} message={'Something went wrong. Try again later.'} />
   if (!data) return <PageLoading />

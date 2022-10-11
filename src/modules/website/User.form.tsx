@@ -9,7 +9,7 @@ import * as yup from 'yup'
 
 // Local Components
 import { TextField } from '@components/forms'
-import { LoadingSpinnerPortal } from '@modules/general/loading'
+import { LoadingSpinner } from '@modules/general/loading'
 import { Banner, generalBanner, MessageType } from "@components/Banner"
 import { User } from "@models/user.model"
 import { BASE_URL } from "@constants/index"
@@ -144,7 +144,7 @@ const UserForm: NextPage<{ title: string, data?: User, isEditting?: boolean }> =
 
             <div className='flex gap-4 items-center justify-between pt-3'>
               <button className="button primary taller flex gap-3 items-center" type="submit" disabled={submitting}>
-                <LoadingSpinnerPortal visible={submitting} />
+                <LoadingSpinner visible={submitting} />
                 {isEditting ? 'Update' : 'Create'}
               </button>
             </div>

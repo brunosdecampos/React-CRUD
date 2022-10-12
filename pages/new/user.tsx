@@ -10,7 +10,6 @@ import { TopNavBar } from '@modules/website/TopNavBar.layout'
 const CreateUser: NextPage = () => {
   return <>
     <Meta title='Create' description='User registration form' />
-
     <TopNavBar leftLinkName='Back to users' leftLinkPath='/' />
 
     <div className={stylesWebsite.userForm}>

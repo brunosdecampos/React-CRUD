@@ -19,17 +19,9 @@ import { PageLoading } from '@modules/general/loading'
 function UsersTable() {
   const router = useRouter()
 
-  const reloadPage = () => {
-    router.replace(router.asPath)
-  }
-
   const handleUpdate = async (userId: string) => {
     router.push(`/edit/user/${userId}`)
   }
-
-  //
-  // Service API
-  //
 
   const handleDelete = async (userId: string) => {
     try {
@@ -39,7 +31,7 @@ function UsersTable() {
         },
         method: 'DELETE'
       }).then(() => {
-        reloadPage()
+        router.reload()
       })
     } catch (error) {
       console.log(error);
